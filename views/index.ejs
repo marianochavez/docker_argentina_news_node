@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Noticias Argentina</title>
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/office/16/000000/sunset--v2.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300"
+    rel="stylesheet"
+    type="text/css"
+  />
+ </head>
+<body>
+    <section>
+        <div class="title-container p-4">
+            <div class="row align-items-center">
+                <div class="col text-center">
+                    <p class="display-1">
+                        Noticias Argentina <i class="fas fa-newspaper"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-container-2 navbar p-2">
+            <p class="navbar-brand ">
+                    Dolar Oficial <i class="fas fa-arrow-right"></i> <%= dolar_oficial_buy %> - <%= dolar_oficial_sell %>
+                <br>Dolar Blue <i class="fas fa-arrow-right"></i> <%= dolar_blue_buy %> - <%= dolar_blue_sell %>
+                <br>Euro <i class="fas fa-arrow-right"></i> <%= euro_oficial_buy %> - <%= euro_oficial_sell %>
+            </p>
+            <!-- <form method="POST" class="form-inline">
+                <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+            </form> -->
+            <form action="/" method="post">
+                <input name="city" type="text" class="ghost-input" placeholder="Buscador de Clima" required>
+                <input type="submit" class="ghost-button" value="Buscar">
+            </form>
+        </div>
+            
+    </section>
+    
+    
+    <% if (weather !== null){ %>
+    <section>
+        <div class="container p-4 weather-container">
+            <div class="row align-items-center">
+                <div class="col-6">
+                    <div class="card flex-row flex-wrap border-dark">
+                        <div class="card-header border-0">
+                            <img src="<%= icon %>" alt="Weather-Icon">
+                        </div>
+                        <div class="card-block px-2">
+                            <h4 class="card-title"><%= place %></h4>
+                            <small class="card-text">
+                                Actual: <strong><%= temp %>°C</strong>
+                                <br>
+                                Sensación: <%= feelslike %>°C
+                                <br>
+                                Humedad: <%= humidity %>%
+                                <br>
+                                <%= description %>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>    
+    </section>
+    <% } %>
+  
+    <% if(error !== null){ %>
+        <h3 class="text-danger text-center py-3"><%= error %></h3>
+    <% } %>
+
+    <section>
+        <div class="container p-3 covid-container">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2><strong>COVID-19</strong> - Argentina</h2>
+                </div>
+                <div class="col">
+                    <h4 class="text-center text-white">HOY</h4>
+                    <ul class="list-group border-dark">
+                        <li class="list-group-item"><strong>Nuevos casos:</strong> <%= covid_confirmed_daily %></li>
+                        <li class="list-group-item"><strong>Casos activos:</strong> <%= covid_active %></li>
+                        <li class="list-group-item"><strong>Muertes:</strong> <%= covid_death_daily %></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h4 class="text-center text-white">TOTAL</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Contagiados:</strong> <%= covid_confirmed_total %></li>
+                        <li class="list-group-item"><strong>Recuperados:</strong> <%= covid_recovered_total %></li>
+                        <li class="list-group-item"><strong>Muertes:</strong> <%= covid_death_total %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>    
+    </section>
+
+    <section>
+        <div class="container pt-3 pb-3 news-container">
+            <h3 class="text-center">Ultimos Títulos</h3>
+            <hr>
+            <% for (var post in news_data) {%>
+            <div class="row d-flex justify-content-center mb-2">
+                <div class="col-sm-15 col-md-8 col-lg-8 py-0 pl-3 pr-1 featcard">
+                    <div id="featured" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="card bg-dark text-white"> <img class="card-img img-fluid" src="<%= news_data[post].urlToImage %>" alt="">
+                                    <div class="card-img-overlay d-flex linkfeat"> 
+                                        <a href="<%= news_data[post].url %>" class="align-self-end"> <span class="badge"><%= news_data[post].source %></span>
+                                            <h4 class="card-title"><%= news_data[post].title %></h4>
+                                            <p class="textfeat" style="display: none;"><%= news_data[post].description %></p>
+                                        </a> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+    </section>
+    
+    
+    <footer class="bg-dark">
+
+        <div class=" text-center py-4 text-white">© 2021 Copyright
+        <a href="https://github.com/marianochavez"> <h3>Mariano Chavez - 42966</h3></a>
+        </div>
+    
+    </footer>
+</body>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+$(".linkfeat").hover(
+function () {
+$(".textfeat").show(500);
+},
+function () {
+$(".textfeat").hide(500);
+}
+);
+});
+</script>
+</html>
