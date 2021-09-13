@@ -26,12 +26,6 @@ var covid_confirmed_total = 0;
 var covid_recovered_total = 0;
 var covid_death_total = 0;
 
-// var today = new Date();
-// var dd = String(today.getDate()).padStart(2, '0');
-// var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-// var yyyy = today.getFullYear();
-// today = yyyy + '/' + mm + '/' + dd;
-
 // NEWS DATA
 const apiKeyNews = "bfc611e9f0aa4ee7a389121fd7704076"
 var news_data = [];
@@ -45,7 +39,8 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) =>  {
 
     axios.all([
-      axios.get('https://api.bluelytics.com.ar/v2/latest'),
+      axios.get(
+        'https://api.bluelytics.com.ar/v2/latest'),
       axios.get(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&lang=es&appid=${apiKeyOpenWeather}`),
       axios.get(
@@ -80,8 +75,6 @@ app.get("/", (req, res) =>  {
           weatherDescription = `${weather.data.weather[0].description}`,
           humidity = `${weather.data.main.humidity}`,
           feels_like = `${weather.data.main.feels_like}`
-          clouds = `${weather.data.clouds.all}`,
-          visibility = `${weather.data.visibility}`,
           main = `${weather.data.weather[0].main}`;
 
         // COVID DATA
@@ -127,8 +120,6 @@ app.get("/", (req, res) =>  {
           description: weatherDescription,
           humidity: humidity,
           feelslike: feels_like,
-          clouds: clouds,
-          visibility: visibility,
           main: main,
           error: null,
 
