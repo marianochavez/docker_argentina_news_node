@@ -1,6 +1,5 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
 const axios = require('axios');
 const { response } = require("express");
 
@@ -61,7 +60,7 @@ app.get("/", (req, res) =>  {
       axios.get(
         `https://newsapi.org/v2/top-headlines?&apiKey=${apiKeyNews}`,
         {
-          params: {country: 'AR', pageSize: '5', page: '1'}
+          params: {country: 'AR', pageSize: '9', page: '1'}
         }),
     ])
       .then(axios.spread((dolar,weather,covid,news) => {
@@ -96,6 +95,8 @@ app.get("/", (req, res) =>  {
 
 
         // NEWS API
+
+        news_data = [];
 
         for (const post in news.data.articles){
           let report = {

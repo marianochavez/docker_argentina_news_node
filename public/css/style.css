@@ -34,8 +34,7 @@ a:hover,
 /* aaaaaaaaaaaaaaaaaaaaaaaaaa */
 .title-container{
     background-color: #6F51D1;
-    color: white;
-    
+    color: white;  
 }
 
 
@@ -43,9 +42,6 @@ a:hover,
     background-color: #6F51D1;
     color: white;
     box-shadow: 0px 10px 5px gray;
-}
-
-.weather-container{
 }
 
 .covid-container{
@@ -57,12 +53,3 @@ a:hover,
 .covid-container .card{
     width: 20rem;
 }
-
-.news-container{
-    /* border-left :solid;
-    border-right: solid;
-    border-bottom: solid; */
-    
-    /* background-color: #ffed94; */
-}
-
